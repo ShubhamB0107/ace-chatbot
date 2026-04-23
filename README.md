@@ -30,20 +30,60 @@ ace-chatbot/
 
 ---
 
-### Step 2 — Run the Backend (FastAPI)
+### Step 2 — Create your .env file (API Key goes here)
+
+Create a file called `.env` inside the `backend/` folder:
+
+```
+backend/
+└── .env        ← create this file
+```
+
+Paste this inside `.env`:
+
+```
+OPENAI_API_KEY=sk-proj-your-actual-key-here
+```
+
+> ⚠️ No quotes, no spaces around the `=` sign  
+> ⚠️ Never share this file or push it to GitHub
+
+Also create a `.gitignore` file in the root folder to protect your key:
+
+```
+# .gitignore
+.env
+__pycache__/
+node_modules/
+```
+
+---
+
+### Step 3 — Update main.py to load the .env file
+
+Open `backend/main.py` and make sure these lines are at the top:
+
+```python
+from dotenv import load_dotenv
+load_dotenv()   # This reads your .env file automatically
+```
+
+The line below will now automatically pick up your key from `.env`:
+
+```python
+openai.api_key = os.getenv("OPENAI_API_KEY")
+```
+
+---
+
+### Step 4 — Run the Backend (FastAPI)
 
 ```bash
 # Go to backend folder
 cd backend
 
-# Install packages
+# Install packages (includes python-dotenv)
 pip install -r requirements.txt
-
-# Set your API key (Mac/Linux)
-export OPENAI_API_KEY="your-key-here"
-
-# Set your API key (Windows)
-set OPENAI_API_KEY=your-key-here
 
 # Start the server
 uvicorn main:app --reload
@@ -56,7 +96,7 @@ Test it by opening: http://127.0.0.1:8000 in your browser ✅
 
 ---
 
-### Step 3A — Run the Frontend (React)
+### Step 5A — Run the Frontend (React)
 
 ```bash
 # Go to frontend folder
@@ -73,7 +113,7 @@ npm start
 
 ---
 
-### Step 3B — Run Streamlit (Easier Alternative)
+### Step 5B — Run Streamlit (Easier Alternative)
 
 ```bash
 # From the root folder
@@ -136,7 +176,7 @@ Frontend displays reply
 2. Go to render.com → New → Web Service
 3. Connect your GitHub repo
 4. Build command: `pip install -r requirements.txt`
-5. Start command: `uvicorn main:app --host 0.0.0.0 --port $PORT`
+5. Start command: `python -m uvicorn main:app --host 0.0.0.0 --port $PORT`
 6. Add environment variable: `OPENAI_API_KEY = your-key`
 
 ### Frontend

@@ -7,7 +7,7 @@
 import { useState, useRef, useEffect } from "react";
 
 // ── Config ───────────────────────────────────────────────────
-const API_URL = "http://localhost:8000"; // Your FastAPI backend URL
+const API_URL = "https://ace-chatbot-backend.onrender.com";
 
 // ── Helper: call the backend ─────────────────────────────────
 async function sendMessageToAPI(message, history) {
